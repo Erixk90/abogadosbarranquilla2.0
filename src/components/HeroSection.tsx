@@ -3,7 +3,7 @@ import heroImage from '@/assets/hero-law-firm.jpg';
 
 const HeroSection = () => {
   // Número de WhatsApp (cambiar por el número real)
-  const whatsappNumber = "573008471898";
+  const whatsappNumber = "573001477860";
   
   const openWhatsAppConsulta = () => {
     const message = "Hola, me gustaría solicitar una consulta legal gratuita. ¿Podrían ayudarme?";

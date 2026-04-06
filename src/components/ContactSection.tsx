@@ -19,8 +19,8 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: 'WhatsApp',
-      info: '+57 300 8471898',
-      link: 'https://wa.me/573008471898?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios%20legales'
+      info: '+57 3001477860',
+      link: 'https://wa.me/573001477860?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios%20legales'
     },
     {
       icon: Mail,
@@ -84,7 +84,7 @@ Consulta: ${formData.message}
 Solicito una consulta legal gratuita. Gracias.`;
 
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    const whatsappUrl = `https://wa.me/573008471898?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/573001477860?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
 
     toast({

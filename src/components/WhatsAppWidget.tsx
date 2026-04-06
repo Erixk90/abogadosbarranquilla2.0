@@ -5,7 +5,7 @@ const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   
   // Número de WhatsApp del bufete (cambiar por el número real)
-  const whatsappNumber = "573008471898"; // Formato internacional sin +
+  const whatsappNumber = "573001477860"; // Formato internacional sin +
   
   const openWhatsApp = (message?: string) => {
     const defaultMessage = "Hola, me gustaría solicitar una consulta legal gratuita.";

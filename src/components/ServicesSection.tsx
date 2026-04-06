@@ -100,7 +100,7 @@ const ServicesSection = () => {
                   onClick={() => {
                     const message = "Hola, necesito asesoramiento legal. ¿Podrían ayudarme con una consulta gratuita?";
                     const encodedMessage = encodeURIComponent(message);
-                    const whatsappUrl = `https://wa.me/573008471898?text=${encodedMessage}`;
+                    const whatsappUrl = `https://wa.me/573001477860?text=${encodedMessage}`;
                     window.open(whatsappUrl, '_blank');
                   }}
                   className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 shadow-professional flex items-center justify-center mx-auto space-x-2"

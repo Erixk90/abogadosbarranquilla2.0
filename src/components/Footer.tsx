@@ -52,12 +52,12 @@ const Footer = () => {
                 <div className="flex items-center space-x-3">
                   <Phone className="h-4 w-4 text-primary-foreground/60" />
                   <a 
-                    href="https://wa.me/573008471898?text=Hola,%20me%20gustaría%20contactar%20con%20el%20estudio%20jurídico"
+                    href="https://wa.me/573001477860?text=Hola,%20me%20gustaría%20contactar%20con%20el%20estudio%20jurídico"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300"
                   >
-                    +57 300 8471898 (WhatsApp)
+                    +57 300 1477860 (WhatsApp)
                   </a>
                 </div>
                 <div className="flex items-center space-x-3">

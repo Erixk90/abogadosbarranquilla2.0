@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://www.abogadosbq.com/sitemap.xml

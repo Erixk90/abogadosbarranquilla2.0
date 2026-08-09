@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# AI assistant config
+.agents/
+skills-lock.json
+
+# Runtime data (nunca commitear)
+server/data/cms.json
+server/data/sessions.db
+server/uploads/
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+.env.production

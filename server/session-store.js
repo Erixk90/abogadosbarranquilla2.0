@@ -2,7 +2,7 @@ import Database from "better-sqlite3";
 import { createHash, randomBytes } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { mkdir } from "node:fs/promises";
+import { mkdirSync } from "node:fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,9 +14,9 @@ export const generateToken = () => randomBytes(32).toString("base64url");
 
 const defaultSessionTtlMs = Number(process.env.SESSION_TTL_HOURS || 24 * 7) * 60 * 60 * 1000;
 
-export const createSessionStore = async ({ dbPath, ttlMs = defaultSessionTtlMs } = {}) => {
+export const createSessionStore = ({ dbPath, ttlMs = defaultSessionTtlMs } = {}) => {
   const resolvedDbPath = dbPath || process.env.SESSION_DB_PATH || path.join(dataDir, "sessions.db");
-  await mkdir(path.dirname(resolvedDbPath), { recursive: true });
+  mkdirSync(path.dirname(resolvedDbPath), { recursive: true });
 
   const db = new Database(resolvedDbPath);
   db.pragma("journal_mode = WAL");

@@ -1,4 +1,5 @@
 import http from "node:http";
+import { readFileSync } from "node:fs";
 import { readFile, writeFile, mkdir, access, unlink } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -7,6 +8,25 @@ import { createSessionStore } from "./session-store.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const loadEnvFile = () => {
+  try {
+    const raw = readFileSync(path.join(__dirname, ".env"), "utf8");
+    for (const line of raw.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const eq = trimmed.indexOf("=");
+      if (eq === -1) continue;
+      const key = trimmed.slice(0, eq).trim();
+      const value = trimmed.slice(eq + 1).trim();
+      if (!(key in process.env)) process.env[key] = value;
+    }
+  } catch {
+    // Sin archivo .env: usar variables de entorno de cPanel
+  }
+};
+loadEnvFile();
+
 const dataDir = path.join(__dirname, "data");
 const dataFile = path.join(dataDir, "cms.json");
 const uploadsDir = path.join(__dirname, "uploads");
@@ -18,7 +38,7 @@ const corsOrigins = (process.env.CORS_ORIGIN || "")
   .filter(Boolean);
 const sessionCookieName = "abq_session";
 const sessionTtlMs = Number(process.env.SESSION_TTL_HOURS || 24 * 7) * 60 * 60 * 1000;
-const sessionStore = await createSessionStore({ ttlMs: sessionTtlMs });
+const sessionStore = createSessionStore({ ttlMs: sessionTtlMs });
 const maxUploadBytes = 6 * 1024 * 1024;
 const defaultBodyLimit = 1024 * 1024;
 const loginRateLimit = { maxAttempts: 5, windowMs: 15 * 60 * 1000 };
@@ -388,6 +408,9 @@ const applyCorsHeaders = (req, res) => {
 
   res.setHeader("Access-Control-Allow-Origin", origin);
   res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Max-Age", "86400");
   res.setHeader("Vary", "Origin");
 };
 

@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCms } from '@/context/CmsContext';
 import { homeIconConfig } from '@/lib/icons';
 
-const ServicesSection = () => {
+const ServicesSection = ({ onSelectService }: { onSelectService?: (title: string) => void }) => {
   const { services, settings } = useCms();
   const activeServices = services.filter((service) => service.active);
   const { whatsappNumber, whatsappMessage } = settings.contact;
@@ -29,7 +29,18 @@ const ServicesSection = () => {
               return (
                 <Card
                   key={service.id}
-                  className="bg-card shadow-professional hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 group"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => {
+                    onSelectService?.(service.title);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onSelectService?.(service.title);
+                    }
+                  }}
+                  className="bg-card shadow-professional hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <CardHeader className="text-center pb-4">
                     <div className="mb-4 flex justify-center">

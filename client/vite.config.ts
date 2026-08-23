@@ -9,8 +9,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     proxy: {
-      "/api": "http://127.0.0.1:8787",
-      "/media": "http://127.0.0.1:8787",
+      "/api": { target: "https://api.abogadosbq.com", changeOrigin: true },
+      "/media": { target: "https://api.abogadosbq.com", changeOrigin: true },
     },
   },
   plugins: [

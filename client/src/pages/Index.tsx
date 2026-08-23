@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -9,6 +10,8 @@ import NewsCarouselSection from '@/components/home/NewsCarouselSection';
 import { useSEO } from '@/hooks/useSEO';
 
 const Index = () => {
+  const [widgetOpen, setWidgetOpen] = useState(false);
+  const [widgetMessage, setWidgetMessage] = useState("");
   useSEO({
     title: "Abogados en Barranquilla | Estudio Jurídico de Confianza",
     description: "Estudio jurídico en Barranquilla con más de 20 años de experiencia. Asesoría en derecho laboral, penal, familiar, civil e inmobiliario. Consulta gratuita por WhatsApp.",
@@ -23,11 +26,11 @@ const Index = () => {
       <Navigation />
       <HeroSection />
       <AboutSection />
-      <ServicesSection />
+      <ServicesSection onSelectService={(title) => { setWidgetMessage(`Necesito consulta sobre ${title}`); setWidgetOpen(true); }} />
       <NewsCarouselSection />
       <ContactSection />
       <Footer />
-      <WhatsAppWidget />
+      <WhatsAppWidget open={widgetOpen} onOpenChange={setWidgetOpen} initialMessage={widgetMessage} />
     </div>
   );
 };

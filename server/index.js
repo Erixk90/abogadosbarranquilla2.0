@@ -213,7 +213,7 @@ const slugify = (value) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const isValidId = (id) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+const isValidId = (id) => typeof id === "string" && /^[A-Za-z0-9_-]{1,100}$/.test(id);
 
 const makeSlug = (title, existingSlugs, fallbackId) => {
   const base = slugify(title) || "noticia";

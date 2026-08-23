@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { CmsContext } from "@/context/CmsContext";
 import {
   CmsMediaAsset,
@@ -51,6 +51,15 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
+  const refresh = useCallback(async () => {
+    try {
+      const nextState = await fetchCmsState();
+      setState(nextState);
+    } catch (error) {
+      console.error("Failed to refresh CMS state", error);
+    }
+  }, []);
+
   const value = useMemo(() => {
     const posts = sortPosts(state.posts);
     const services = sortServices(state.services);
@@ -73,9 +82,11 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
         return { ...current, posts: nextPosts };
       });
 
-      void upsertPost(normalized).catch((error) => {
-        console.error("Failed to save post", error);
-      });
+      void upsertPost(normalized)
+        .then(() => refresh())
+        .catch((error) => {
+          console.error("Failed to save post", error);
+        });
 
       return normalized;
     };
@@ -86,17 +97,21 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
         posts: current.posts.filter((item) => item.id !== id),
       }));
 
-      void deletePostRequest(id).catch((error) => {
-        console.error("Failed to delete post", error);
-      });
+      void deletePostRequest(id)
+        .then(() => refresh())
+        .catch((error) => {
+          console.error("Failed to delete post", error);
+        });
     };
 
     const saveSettings = (settings: CmsSettings) => {
       setState((current) => ({ ...current, settings }));
 
-      void upsertSettings(settings).catch((error) => {
-        console.error("Failed to save settings", error);
-      });
+      void upsertSettings(settings)
+        .then(() => refresh())
+        .catch((error) => {
+          console.error("Failed to save settings", error);
+        });
     };
 
     const saveService = (service: CmsService) => {
@@ -113,9 +128,11 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
         return { ...current, services: nextServices };
       });
 
-      void upsertService(normalized).catch((error) => {
-        console.error("Failed to save service", error);
-      });
+      void upsertService(normalized)
+        .then(() => refresh())
+        .catch((error) => {
+          console.error("Failed to save service", error);
+        });
 
       return normalized;
     };
@@ -126,9 +143,11 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
         services: current.services.filter((item) => item.id !== id),
       }));
 
-      void deleteServiceRequest(id).catch((error) => {
-        console.error("Failed to delete service", error);
-      });
+      void deleteServiceRequest(id)
+        .then(() => refresh())
+        .catch((error) => {
+          console.error("Failed to delete service", error);
+        });
     };
 
     const uploadMedia = async ({ file, alt }: { file: File; alt?: string }) => {

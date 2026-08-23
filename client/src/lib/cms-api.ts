@@ -8,6 +8,7 @@ const request = async <T>(path: string, init?: RequestInit): Promise<T> => {
       ...(init?.headers || {}),
     },
     credentials: "include",
+    cache: "no-store",
     ...init,
   });
 

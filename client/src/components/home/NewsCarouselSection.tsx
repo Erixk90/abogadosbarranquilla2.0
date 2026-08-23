@@ -134,7 +134,7 @@ const NewsCarouselSection = () => {
                   <ChevronRight className="h-6 w-6" />
                 </button>
 
-                <div className="mt-8 flex w-fit items-center gap-2 rounded-full bg-muted/70 px-4 py-2">
+                <div className="mt-8 flex w-fit items-center gap-3 rounded-full bg-muted/70 px-4 py-2">
                   {chunks.map((_chunk, index) => (
                     <button
                       key={index}
@@ -142,8 +142,8 @@ const NewsCarouselSection = () => {
                       onClick={() => goTo(index)}
                       aria-label={`Ir al grupo de noticias ${index + 1}`}
                       aria-current={activeIndex === index}
-                      className={`h-2.5 rounded-full transition-all duration-500 ${
-                        activeIndex === index ? "w-8 bg-primary" : "w-2.5 bg-border hover:bg-primary/60"
+                      className={`h-3 rounded-full transition-all duration-500 ${
+                        activeIndex === index ? "w-8 bg-primary" : "w-3 bg-border hover:bg-primary/60"
                       }`}
                     />
                   ))}

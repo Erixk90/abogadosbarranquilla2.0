@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,18 +6,19 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminPosts from "./pages/admin/AdminPosts";
-import AdminPostEditor from "./pages/admin/AdminPostEditor";
-import AdminMedia from "./pages/admin/AdminMedia";
-import AdminHome from "./pages/admin/AdminHome";
-import AdminServices from "./pages/admin/AdminServices";
 import RequireAdmin from "@/components/admin/RequireAdmin";
 import AdminShell from "@/components/admin/AdminShell";
 import { CmsProvider } from "@/context/CmsProvider";
 import { AdminAuthProvider } from "@/context/AdminAuthContext";
 import ScrollToHash from "@/components/ScrollToHash";
+
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminPosts = lazy(() => import("./pages/admin/AdminPosts"));
+const AdminPostEditor = lazy(() => import("./pages/admin/AdminPostEditor"));
+const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
+const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
+const AdminServices = lazy(() => import("./pages/admin/AdminServices"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToHash />
+            <Suspense fallback={<div className="min-h-screen" />}>
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/noticias" element={<Index />} />
@@ -106,6 +109,7 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
             </Routes>
+            </Suspense>
           </BrowserRouter>
         </CmsProvider>
       </AdminAuthProvider>

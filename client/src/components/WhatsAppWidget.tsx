@@ -43,7 +43,7 @@ const WhatsAppWidget = ({
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">Estudio Jurídico</h4>
-                  <p className="text-sm text-green-600 flex items-center">
+                    <p className="text-sm text-green-700 flex items-center">
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                     En línea
                   </p>
@@ -51,7 +51,8 @@ const WhatsAppWidget = ({
               </div>
               <button
                 onClick={() => onOpenChange(false)}
-                className="text-muted-foreground hover:text-foreground"
+                aria-label="Cerrar chat"
+                className="rounded p-2 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -85,6 +86,7 @@ const WhatsAppWidget = ({
         {/* Botón flotante */}
         <button
           onClick={() => onOpenChange(!open)}
+          aria-label={open ? "Cerrar chat de WhatsApp" : "Abrir chat de WhatsApp"}
           className="bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full shadow-elegant flex items-center justify-center transition-all duration-300 hover:scale-110"
         >
           {open ? (

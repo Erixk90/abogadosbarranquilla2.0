@@ -67,6 +67,7 @@ const Navigation = () => {
             variant="ghost"
             size="icon"
             className={`md:hidden ${topTextClass} hover:bg-white/10 hover:text-white`}
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

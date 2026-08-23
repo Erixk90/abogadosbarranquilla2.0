@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import teamPhoto from '@/assets/team-photo.jpg';
+import teamPhoto from '@/assets/team-photo.webp';
 import { useCms } from '@/context/CmsContext';
 import { homeIconConfig } from '@/lib/icons';
 
@@ -31,6 +31,8 @@ const AboutSection = () => {
               <img 
                 src={aboutImage} 
                 alt={about.imageAlt}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-96 object-cover rounded-lg shadow-elegant"
               />
             </div>

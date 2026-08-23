@@ -13,6 +13,14 @@ export default defineConfig(({ mode }) => ({
       "/media": { target: "https://api.abogadosbq.com", changeOrigin: true },
     },
   },
+  preview: {
+    host: "::",
+    port: 4173,
+    proxy: {
+      "/api": { target: "https://api.abogadosbq.com", changeOrigin: true },
+      "/media": { target: "https://api.abogadosbq.com", changeOrigin: true },
+    },
+  },
   plugins: [
     react(),
     mode === 'development' &&

@@ -1,0 +1,13 @@
+# Abogados Barranquilla
+
+Estudio jurídico en Barranquilla con más de 20 años de experiencia en asesoría legal integral: derecho laboral, penal, familiar, civil e inmobiliario. Consulta gratuita por WhatsApp.
+
+## Principal
+- [Inicio](https://www.abogadosbq.com/): Página principal con presentación, servicios destacados y noticias.
+- [Servicios](https://www.abogadosbq.com/#servicios): Áreas legales atendidas por el despacho.
+- [Noticias](https://www.abogadosbq.com/noticias): Publicaciones y actualidad jurídica.
+- [Contacto](https://www.abogadosbq.com/#contacto): Información de contacto y formulario de consulta.
+
+## Recursos
+- [API de noticias](https://api.abogadosbq.com/api/cms): Endpoint público con las noticias publicadas.
+- [Política y avisos](https://www.abogadosbq.com/sitemap.xml): Mapa del sitio.

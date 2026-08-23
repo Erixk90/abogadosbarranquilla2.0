@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { format } from "date-fns";
-import heroImage from "@/assets/hero-law-firm.jpg";
+import heroImage from "@/assets/hero-law-firm.webp";
 import { useCms } from "@/context/CmsContext";
 import type { CmsPost } from "@/lib/cms";
 
@@ -167,7 +167,7 @@ const HeroSection = () => {
               <div className="mb-8 text-center text-primary-foreground">
                 <p className="mb-2 text-sm font-semibold uppercase tracking-[0.25em] text-accent">Actualidad</p>
                 <h2 className="mb-3">Noticias recientes</h2>
-                <p className="mx-auto max-w-2xl text-lg leading-relaxed opacity-80">
+                <p className="mx-auto max-w-2xl text-lg leading-relaxed opacity-90">
                   Los últimos acontecimientos del ámbito jurídico y de nuestro despacho.
                 </p>
               </div>
@@ -202,7 +202,7 @@ const HeroSection = () => {
                       <h3 className="min-h-14 text-xl font-semibold leading-snug text-primary-foreground">
                         {post.title}
                       </h3>
-                      <p className="line-clamp-3 text-sm leading-relaxed text-primary-foreground/75">{post.excerpt}</p>
+                      <p className="line-clamp-3 text-sm leading-relaxed text-primary-foreground/90">{post.excerpt}</p>
                       <span className="inline-block text-sm font-medium text-accent underline-offset-4 group-hover:underline">
                         Leer noticia
                       </span>
@@ -229,8 +229,8 @@ const HeroSection = () => {
               onClick={() => goTo(index)}
               aria-label={`Ir a la diapositiva ${index + 1}`}
               aria-current={activeIndex === index}
-              className={`h-2.5 rounded-full transition-all duration-500 ${
-                activeIndex === index ? "w-8 bg-accent" : "w-2.5 bg-white/50 hover:bg-white/80"
+              className={`h-3 rounded-full transition-all duration-500 ${
+                activeIndex === index ? "w-8 bg-accent" : "w-3 bg-white/50 hover:bg-white/80"
               }`}
             />
           ))}

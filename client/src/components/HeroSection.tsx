@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { format } from "date-fns";
 import heroImage from "@/assets/hero-law-firm.webp";
@@ -17,7 +17,6 @@ const HeroSection = () => {
   const { hero } = settings;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [activePost, setActivePost] = useState<CmsPost | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const whatsappNumber = hero.whatsappNumber || "573001477860";
@@ -173,9 +172,8 @@ const HeroSection = () => {
               </div>
 
               {post ? (
-                <button
-                  type="button"
-                  onClick={() => setActivePost(post)}
+                <Link
+                  to={`/noticias/${post.slug}`}
                   className="group mx-auto block w-full text-left"
                 >
                   <Card className="h-full overflow-hidden rounded-3xl border border-white/15 bg-white/10 text-primary-foreground shadow-elegant backdrop-blur transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-white/15 group-hover:shadow-[0_24px_60px_-20px_hsl(var(--accent)/0.4)]">
@@ -208,7 +206,7 @@ const HeroSection = () => {
                       </span>
                     </CardContent>
                   </Card>
-                </button>
+                </Link>
               ) : (
                 <p className="text-center text-lg text-primary-foreground/80">
                   Próximamente publicaremos nuevas noticias.
@@ -263,52 +261,6 @@ const HeroSection = () => {
       >
         <div key={activeIndex} className="slide-progress h-full w-full" />
       </div>
-
-      {/* ===== Modal de noticia ===== */}
-      <Dialog open={Boolean(activePost)} onOpenChange={(open) => !open && setActivePost(null)}>
-        <DialogContent className="max-h-[90vh] max-w-4xl overflow-hidden p-0">
-          {activePost ? (
-            <div className="max-h-[90vh] overflow-y-auto p-6 md:p-8">
-              <DialogHeader className="mb-6 text-left">
-                <DialogTitle className="text-2xl text-primary md:text-3xl">{activePost.title}</DialogTitle>
-              </DialogHeader>
-              <div className="space-y-6">
-                <div className="overflow-hidden rounded-2xl bg-muted shadow-sm">
-                  {activePost.coverImage ? (
-                    <img src={activePost.coverImage} alt={activePost.title} className="h-[280px] w-full object-cover md:h-[360px]" />
-                  ) : (
-                    <div className="h-[280px] w-full gradient-primary md:h-[360px]" />
-                  )}
-                </div>
-                <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-primary">
-                    {activePost.category}
-                  </span>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1.5 text-secondary-foreground">
-                    <CalendarDays className="h-4 w-4" />
-                    {activePost.publishedAt ? format(new Date(activePost.publishedAt), "dd MMMM yyyy") : "Sin fecha"}
-                  </span>
-                </div>
-                <p className="text-lg leading-relaxed text-muted-foreground">{activePost.excerpt}</p>
-                <div className="space-y-4 text-base leading-8 text-foreground">
-                  {activePost.content.split("\n\n").map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-                {activePost.tags.length ? (
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {activePost.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-border bg-background px-3 py-1 text-sm text-foreground">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          ) : null}
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };

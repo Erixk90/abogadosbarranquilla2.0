@@ -32,6 +32,7 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
     settings: defaultHomeSettings,
     services: defaultHomeServices,
   });
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -44,6 +45,11 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
       })
       .catch((error) => {
         console.error("Failed to load CMS state", error);
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setReady(true);
+        }
       });
 
     return () => {
@@ -170,6 +176,7 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return {
+      ready,
       posts,
       publishedPosts,
       featuredPosts,
@@ -189,7 +196,7 @@ export const CmsProvider = ({ children }: { children: ReactNode }) => {
       uploadMedia,
       deleteMedia,
     };
-  }, [state]);
+  }, [state, ready]);
 
   return <CmsContext.Provider value={value}>{children}</CmsContext.Provider>;
 };

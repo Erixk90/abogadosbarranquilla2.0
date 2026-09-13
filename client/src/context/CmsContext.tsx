@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 import type { CmsMediaAsset, CmsPost, CmsService, CmsSettings } from "@/lib/cms";
 
 type CmsContextValue = {
+  ready: boolean;
   posts: CmsPost[];
   publishedPosts: CmsPost[];
   featuredPosts: CmsPost[];

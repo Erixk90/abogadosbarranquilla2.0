@@ -13,6 +13,7 @@ import { AdminAuthProvider } from "@/context/AdminAuthContext";
 import ScrollToHash from "@/components/ScrollToHash";
 
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const NewsPost = lazy(() => import("./pages/NewsPost"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminPosts = lazy(() => import("./pages/admin/AdminPosts"));
 const AdminPostEditor = lazy(() => import("./pages/admin/AdminPostEditor"));
@@ -35,6 +36,7 @@ const App = () => (
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/noticias" element={<Index />} />
+            <Route path="/noticias/:slug" element={<NewsPost />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin"

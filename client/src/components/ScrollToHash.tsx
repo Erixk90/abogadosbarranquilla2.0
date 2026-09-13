@@ -7,7 +7,10 @@ const ScrollToHash = () => {
 
   useEffect(() => {
     const targetId = hash.replace("#", "") || (pathname === "/noticias" ? "noticias" : "");
-    if (!targetId) return;
+    if (!targetId) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
 
     const target = document.getElementById(targetId);
 

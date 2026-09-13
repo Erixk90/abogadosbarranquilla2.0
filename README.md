@@ -32,20 +32,50 @@ Sitio web de un bufete de abogados en Barranquilla y la Costa Caribe colombiana,
 Requisitos: Node.js 18+ y npm (o pnpm).
 
 ```bash
-# Instalar dependencias de ambas apps
+# Instalar dependencias de ambas apps (desde la raíz)
 npm install
-
-# Terminal 1: frontend (Vite en http://localhost:8080)
-npm run dev
-
-# Terminal 2: API (Node en http://localhost:8787)
-npm run dev:api
 ```
 
-URLs:
-- Frontend: http://localhost:8080
-- API: http://localhost:8787
-- Login admin: http://localhost:8080/admin/login
+Levanta cada app en su propia terminal, desde la raíz del repo:
+
+```bash
+# Terminal 1: API (Node en http://localhost:8787)
+npm run dev:api
+# -> CMS API listening on http://localhost:8787
+
+# Terminal 2: Frontend (Vite, por defecto en http://localhost:8080)
+npm run dev
+# Si el 8080 está ocupado, Vite toma el siguiente puerto libre (p. ej. 8081)
+```
+
+### URLs para probar
+
+| Qué | URL |
+| --- | --- |
+| Frontend | http://localhost:8080 (o el puerto que muestre Vite) |
+| Noticia con URL propia | http://localhost:8080/noticias/<slug> |
+| API CMS | http://localhost:8787/api/cms |
+| Login admin | http://localhost:8080/admin/login |
+
+> El API **solo responde bajo `/api`**: la raíz `http://localhost:8787/` devuelve 404 a propósito.
+
+### Notas
+
+- El front en dev **no consume el API local**: `client/vite.config.ts` proxya `/api` y `/media` a `https://api.abogadosbq.com`. Así carga el contenido real aunque el API local esté apagado; el API local sirve para probar escrituras del CMS sobre `server/data/cms.json` (en el repo está vacío).
+- Para que el front use el API local, cambia en `client/vite.config.ts` los `target` del `server.proxy` a `http://127.0.0.1:8787`.
+- Si necesitas reiniciar un puerto ocupado:
+  ```powershell
+  Get-NetTCPConnection -LocalPort 8080,8787 -State Listen -ErrorAction SilentlyContinue |
+    ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
+  ```
+
+### Build de producción
+
+```bash
+npm run build     # genera client/dist (debe coincidir con lo desplegado)
+npm run preview   # sirve el build localmente para verificarlo
+npm run lint      # ESLint sobre client/
+```
 
 ## Despliegue en cPanel
 

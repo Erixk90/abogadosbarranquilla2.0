@@ -7,7 +7,7 @@
 - `client/src/pages/Index.tsx` compone las secciones de la landing.
 - Mantén las rutas custom por encima de la ruta catch-all `*` en `client/src/App.tsx`.
 - `/noticias` es la misma ruta home del SPA y hace scroll al carrusel de noticias; no lo conviertas en un blog separado salvo que ese sea el cambio UX deseado.
-- El frontend habla con la API en `/api`; en dev Vite proxya `/api` y `/media` a `http://127.0.0.1:8787`. En producción `VITE_API_URL` define el origen absoluto de la API (ej. `https://api.abogadosbq.com`).
+- El frontend habla con la API en `/api`; en dev Vite proxya `/api` y `/media` a `https://api.abogadosbq.com` (prod, ver `client/vite.config.ts`). El API local en `http://127.0.0.1:8787` se usa para probar escrituras del CMS si cambias los `target`. En producción `VITE_API_URL` define el origen absoluto de la API (ej. `https://api.abogadosbq.com`).
 
 ## Commands
 - Usa scripts npm; `npm install` en la raíz instala ambos workspaces.

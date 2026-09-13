@@ -10,4 +10,4 @@ Estudio jurídico en Barranquilla con más de 20 años de experiencia en asesor�
 
 ## Recursos
 - [API de noticias](https://api.abogadosbq.com/api/cms): Endpoint público con las noticias publicadas.
-- [Política y avisos](https://www.abogadosbq.com/sitemap.xml): Mapa del sitio.
+- [Mapa del sitio](https://www.abogadosbq.com/sitemap.xml): Índice de URLs del sitio.
